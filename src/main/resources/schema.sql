@@ -3,7 +3,10 @@ drop table if exists authors;
 
 create table authors(
   id int primary key,
-  name varchar(250) not null
+  name varchar(250) not null,
+  biography_short clob,
+  biography_rest clob,
+  photo varchar(250) not null
 );
 
 create table  books(

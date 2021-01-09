@@ -21,17 +21,37 @@ public class BookService {
     List<Book> books =
         jdbcTemplate.query(
             "select b.id, a.name author, b.title, b.priceOld, b.price " +
-                "from books b " +
-                "join authors a on a.id = b.author_id",
-            (ResultSet rs, int rowNum) -> {
-      Book book = new Book();
-      book.setId(rs.getInt("id"));
-      book.setAuthor(rs.getString("author"));
-      book.setTitle(rs.getString("title"));
-      book.setPriceOld(rs.getString("priceOld"));
-      book.setPrice(rs.getString("price"));
-      return book;
-    });
+            "from books b " +
+            "join authors a on a.id = b.author_id",
+            (ResultSet rs, int rowNum) ->
+               new Book(
+                   rs.getInt("id"),
+                   rs.getString("author"),
+                   rs.getString("title"),
+                   rs.getString("priceOld"),
+                   rs.getString("price")
+               )
+        );
+    return new ArrayList<>(books);
+  }
+
+  public List<Book> getBooksByAuthor(Integer authorId) {
+    List<Book> books =
+        jdbcTemplate.query(
+            "select b.id, a.name author, b.title, b.priceOld, b.price " +
+            "from books b " +
+            "join authors a on a.id = b.author_id " +
+            "where b.author_id = ?",
+            (ResultSet rs, int rowNum) ->
+                new Book(
+                    rs.getInt("id"),
+                    rs.getString("author"),
+                    rs.getString("title"),
+                    rs.getString("priceOld"),
+                    rs.getString("price")
+                ),
+            new Object[]{authorId}
+        );
     return new ArrayList<>(books);
   }
 }

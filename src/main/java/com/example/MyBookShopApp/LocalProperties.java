@@ -8,6 +8,8 @@ public class LocalProperties {
   private String mainPage;
   private String genresPage;
   private String authorsPage;
+  private String imagesPath;
+  private String placeholderPath;
 
   public String getBasePath() {
     return basePath;
@@ -41,6 +43,22 @@ public class LocalProperties {
     this.authorsPage = authorsPage;
   }
 
+  public String getImagesPath() {
+    return imagesPath;
+  }
+
+  public void setImagesPath(String imagesPath) {
+    this.imagesPath = imagesPath.replace('.', '/');
+  }
+
+  public String getPlaceholderPath() {
+    return placeholderPath;
+  }
+
+  public void setPlaceholderPath(String placeholderPath) {
+    this.placeholderPath = placeholderPath.replace('.', '/');
+  }
+
   public String getMainPageFullPath() {
     String result;
     if (basePath.startsWith("/")) {
@@ -60,7 +78,7 @@ public class LocalProperties {
 
   public String getGenresPageFullPath() {
     String result;
-    if (basePath.startsWith("/")) {
+    if (basePath.charAt(0) == '/') {
       result = basePath;
     } else {
       result = '/' + basePath;

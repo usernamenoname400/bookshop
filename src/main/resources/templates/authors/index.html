@@ -120,7 +120,7 @@
                 </h2>
                 <div class="Authors-letter">
                   <div class="Authors-item" th:each="author : ${authorGroup.getAuthors()}">
-                    <a href="/authors/slug.html" th:text="${author.getName()}"></a>
+                    <a th:href="${authorsPage} + '/' + ${author.getId()}" th:text="${author.getName()}"></a>
                   </div>
                 </div>
               </div>

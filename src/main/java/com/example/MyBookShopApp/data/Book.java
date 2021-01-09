@@ -7,6 +7,17 @@ public class Book {
   private String priceOld;
   private String price;
 
+  public Book(Integer id, String author, String title, String priceOld, String price) {
+    this.id = id;
+    this.author = author;
+    this.title = title;
+    this.priceOld = priceOld;
+    this.price = price;
+  }
+
+  public Book() {
+  }
+
   @Override
   public String toString() {
     return "Book{" +
